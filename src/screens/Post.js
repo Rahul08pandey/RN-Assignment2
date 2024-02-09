@@ -1,108 +1,3 @@
-//  import {
-//   StyleSheet,
-//   Text,
-//   View,
-//   TextInput,
-//   Image,
-//   TouchableOpacity,
-// } from 'react-native';
-// import React from 'react';
-
-// const Post = () => {
-//   return (
-//     <View style={styles.mainContainer}>
-//       <View>
-//         <Text
-//           style={{
-//             fontSize: 14,
-//             fontWeight:'500',
-//             color: '#000000',
-//             marginBottom:10,
-//             fontFamily: 'Poppins',
-//           }}>
-//           Select Image
-//         </Text>
-//         <View style={styles.inputStyle}>
-//           <TouchableOpacity>
-//             <Image style={styles.img} source={require('../image/plus.png')} />
-//           </TouchableOpacity>
-//         </View>
-//       </View>
-//       <View>
-//         <Text
-//           style={{
-//             fontSize: 14,
-//             marginTop:10,
-//             marginBottom:10,
-//             fontWeight:'500',
-//             color: '#000000',
-//             fontFamily: 'Poppins',
-//           }}>
-//           Add Caption
-//         </Text>
-//         <TextInput style={styles.inputStyle2} />
-//       </View>
-//       <TouchableOpacity style={styles.submitContainer}>
-//         <Text
-//           style={{
-//             width: '100%',
-//             fontSize: 18,
-//             color: '#FFFFFF',
-//             fontWeight:'600',
-//             textAlign: 'center',
-//             marginVertical: 10,
-//             fontFamily: 'Poppins',
-//           }}>
-//           Upload
-//         </Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// };
-
-// export default Post;
-
-// const styles = StyleSheet.create({
-//   mainContainer: {
-//     flex: 1,
-//     margin: 20,
-//   },
-
-//   inputStyle: {
-//     alignItems: 'flex-end',
-//     justifyContent: 'flex-end',
-//     width: '100%',
-//     backgroundColor: '#F2F2F2',
-//     borderRadius: 10,
-//     borderColor: '#006175',
-//     borderWidth: 0.5,
-//     marginTop: 2,
-//     height: 150,
-//   },
-
-//   img: {
-//     margin: '3%',
-//   },
-
-//   inputStyle2: {
-//     paddingLeft: 15,
-//     width: '100%',
-//     backgroundColor: '#F2F2F2',
-//     borderRadius: 10,
-//     borderColor: '#006175',
-//     borderWidth: 0.5,
-//     marginTop: 2,
-//     height: 100,
-//   },
-
-//   submitContainer: {
-//     marginTop:20,
-//     borderRadius: 10,
-//     backgroundColor: '#1C6758',
-//   },
-
-// });
-
 import React, {useState} from 'react';
 import {
   StyleSheet,
@@ -121,6 +16,7 @@ import { addImage } from '../redux/actions/actions';
 const Post = ({navigation}) => {
   const dispatch=useDispatch();
   const user = useSelector(state => state.user);
+  console.log('user:',user);
   const [isModalVisible, setModalVisible] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
 
@@ -145,7 +41,6 @@ const Post = ({navigation}) => {
 
   const handleAdd=()=>{
     if (capturedImage) {
-    // Dispatch an action to add the captured image
     dispatch(addImage(capturedImage)); // Replace addImage with your actual action creator
     toggleModal(); // Close the modal after adding the image
   } else {

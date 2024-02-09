@@ -21,95 +21,90 @@ const Register = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [loadData, setLoadData] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         'https://dummyapi.io/data/v1/user?created=1/',
-  //         {
-  //           headers: {
-  //             'Content-Type': 'application/json',
-  //             'app-id': '65b9f249af8a80c525603fda',
-  //           }, 
-  //         },
-  //       );
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(
+          'https://dummyapi.io/data/v1/user?created=1/',
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'app-id': '65b9f249af8a80c525603fda',
+            }, 
+          },
+        );
 
-  //       if (!response.ok) {
-  //         console.error('Error fetching user data:', response.status);
-  //         return;
-  //       }
+        if (!response.ok) {
+          console.error('Error fetching user data:', response.status);
+          return;
+        }
 
-  //       const data = await response.json();
-  //       console.log('API response:', data);
-  //       setRegisteredUserData(data.data);
-  //       setLoadData(false); // Set loading to false after updating the state
-  //     } catch (error) {
-  //       console.error('Error during API call:', error);
-  //       setLoadData(false); // Set loading to false in case of an error
-  //     }
-  //   };
+        const data = await response.json();
+        console.log('API response:', data);
+        setRegisteredUserData(data.data);
+        setLoadData(false); // Set loading to false after updating the state
+      } catch (error) {
+        console.error('Error during API call:', error);
+        setLoadData(false); // Set loading to false in case of an error
+      }
+    };
 
-  //   fetchUserData();
-  // }, []);
+    fetchUserData();
+  }, []);
 
-  // useEffect(() => {
-  //   console.log('State after API call:', registeredUserData);
-  // }, [registeredUserData]);
+  useEffect(() => {
+    console.log('State after API call:', registeredUserData);
+  }, [registeredUserData]);
 
-  // const requestOptions = {
-  //   method: 'POST',
-  //   headers: {
-  //     'app-id': '65b9f249af8a80c525603fda',
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({
-  //     firstName: firstName,
-  //     lastName: lastName,
-  //     email: email,
-  //   }),
-  // };
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'app-id': '65b9f249af8a80c525603fda',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+    }),
+  };
 
-  // const handleRegister = async () => {
-  //   console.log('Register User:', registeredUserData);
+  const handleRegister = async () => {
+    console.log('Register User:', registeredUserData);
 
-  //   const matchingUsers = registeredUserData.filter(
-  //     user => user.firstName === firstName && user.lastName === lastName,
-  //   );
+    const matchingUsers = registeredUserData.filter(
+      user => user.firstName === firstName && user.lastName === lastName,
+    );
 
-  //   if (matchingUsers.length > 0) {
-  //     Alert.alert(
-  //       'User already exist. Please Register with another credentials',
-  //       JSON.stringify(matchingUsers),
-  //     );
-  //     // Navigate to the Home screen or perform other actions
-  //   } else {
-  //     try {
-  //       console.log('Sending POST request');
-  //       const response = await fetch(
-  //         'https://dummyapi.io/data/v1/user/create',
-  //         requestOptions,
-  //       );
-  //       console.log('POST request completed.');
+    if (matchingUsers.length > 0) {
+      Alert.alert(
+        'User already exist. Please Register with another credentials',
+        JSON.stringify(matchingUsers),
+      );
+    } else {
+      try {
+        console.log('Sending POST request');
+        const response = await fetch(
+          'https://dummyapi.io/data/v1/user/create',
+          requestOptions,
+        );
+        console.log('POST request completed.');
 
-  //       const data = await response.json();
+        const data = await response.json();
 
-  //       if (response.ok) {
-  //         console.log('Registration successful:', data);
-  //         Alert.alert('User Registered Successfully');
-  //         navigation.navigate('Login');
-  //       } else {
-  //         console.error('Registration failed:', data);
-  //         Alert.alert('Registration Failed');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error during registration:', error);
-  //     }
-  //   }
-  // };
-
-  const handleRegister=async()=>{
- 
-  }
+        if (response.ok) {
+          console.log('Registration successful:', data);
+          Alert.alert('User Registered Successfully');
+          navigation.navigate('Login');
+        } else {
+          console.error('Registration failed:', data);
+          Alert.alert('Registration Failed');
+        }
+      } catch (error) {
+        console.error('Error during registration:', error);
+      }
+    }
+  };
 
   const handleSignin = () => {
     navigation.navigate('Login');

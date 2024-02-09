@@ -20,97 +20,68 @@ const Login = ({navigation}) => {
   const [lastName, setLastName] = useState('');
   const [loadData, setLoadData] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         'https://dummyapi.io/data/v1/user?created=1/',
-  //         {
-  //           headers: {
-  //             'Content-Type': 'application/json',
-  //             'app-id': '65b9f249af8a80c525603fda',
-  //           },
-  //         },
-  //       );
-  //       if (!response.ok) {
-  //         console.error('Error fetching user data:', response.status);
-  //         return;
-  //       }
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(
+          'https://dummyapi.io/data/v1/user?created=1/',
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'app-id': '65b9f249af8a80c525603fda',
+            },
+          },
+        );
+        if (!response.ok) {
+          console.error('Error fetching user data:', response.status);
+          return;
+        }
 
-  //       const data = await response.json();
-  //       console.log('API response:', data);
-  //       setRegisteredUserData(data.data);
-  //       setLoadData(false); // Set loading to false after updating the state
-  //     } catch (error) {
-  //       console.error('Error during API call:', error);
-  //       setLoadData(false); // Set loading to false in case of an error
-  //     }
-  //   };
+        const data = await response.json();
+        console.log('API response:', data);
+        setRegisteredUserData(data.data);
+        setLoadData(false); // Set loading to false after updating the state
+      } catch (error) {
+        console.error('Error during API call:', error);
+        setLoadData(false); // Set loading to false in case of an error
+      }
+    };
 
-  //   fetchUserData();
-  // }, []);
+    fetchUserData();
+  }, []);
 
-  // useEffect(() => {
-  //   console.log('State after API call:', registeredUserData);
-  // }, [registeredUserData]);
+  useEffect(() => {
+    console.log('State after API call:', registeredUserData);
+  }, [registeredUserData]);
 
-
-
-
-
-
-
-
-
-
-    const handleLogin=async()=>{
-
-    // try{
-    //   if(!firstName || !lastName){
-    //     throw new Error('Please enter your first and last name');
-    //   }
-    //   setLoadData(true);
-    //   await dispatch(logIn(firstName,lastName));
-    //   setLoadData(false);
-    //   // navigation.navigate('DrawerNavigator');
-    //   // Alert.alert('You are now logged in!',`${firstName} ${lastName}`);
-    // } catch(err) {
-    //   console.log('Login failed:',err);
-    //   setLoadData(false);
-    //   Alert.alert('Login failed', err.message);
-    // }
-    
-    
-    //   console.log('Login Data:', registeredUserData);
-    
-    //   if (loadData) {
-      //     // Optionally handle loading state
-      //     Alert.alert('Please wait, data is still loading.');
-      //     return;
-      //   }
+  const handleLogin=async()=>{
+      console.log('Login Data:', registeredUserData);
+      if (loadData) {
+          // Optionally handle loading state
+          Alert.alert('Please wait, data is still loading.');
+          return;
+        }
       
-      //   if (!Array.isArray(registeredUserData)) {
-        //     Alert.alert('Invalid user data format.');
-        //     return;
-        //   }
+        if (!Array.isArray(registeredUserData)) {
+            Alert.alert('Invalid user data format.');
+            return;
+          }
         
-        // const matchingUsers = registeredUserData.filter(
-          //   user => user.firstName === firstName && user.lastName === lastName,
-          // );
+        const matchingUsers = registeredUserData.filter(
+            user => user.firstName === firstName && user.lastName === lastName,
+          );
           
-          //  if (matchingUsers.length > 0) {
-            //   Alert.alert('You are now logged in!',`${firstName} ${lastName}`);
-            //   // console.log('Sign In Successful!', JSON.stringify(matchingUsers));
-            //   navigation.navigate('DrawerNavigator');
-            // } 
-            // else {
-              //   Alert.alert('Please check your credentials');
-              //   // console.log('Login failed');
-              //   // // setLoadData(false);
-              //   // Alert.alert('Login failed');
-              // }
-              
-              
+           if (matchingUsers.length > 0) {
+              Alert.alert('You are now logged in!',`${firstName} ${lastName}`);
+              console.log('Sign In Successful!', JSON.stringify(matchingUsers));
+              navigation.navigate('DrawerNavigator');
+            } 
+            else {
+                Alert.alert('Please check your credentials');
+                // console.log('Login failed');
+                // // setLoadData(false);
+                // Alert.alert('Login failed');
+              }
               
               console.log('Login Data:', registeredUserData);
               
@@ -118,17 +89,17 @@ const Login = ({navigation}) => {
                 
                 Alert.alert('Invalid user data format.');
                 return;
-                  const matchingUsers = registeredUserData.filter(
-                      user => user.firstName === firstName && user.lastName === lastName,
-                    );
+                //   const matchingUsers = registeredUserData.filter(
+                //       user => user.firstName === firstName && user.lastName === lastName,
+                //     );
               
-                    if (matchingUsers.length > 0) {
-                        Alert.alert('Sign In Successful!', JSON.stringify(matchingUsers));
-                  // Navigate to the Home screen or perform other actions
-                  navigation.navigate('Welcome');
-                } else {
-                  Alert.alert('Please Check your Credentials');
-                }
+                //     if (matchingUsers.length > 0) {
+                //         Alert.alert('Sign In Successful!', JSON.stringify(matchingUsers));
+                //   // Navigate to the Home screen or perform other actions
+                //   navigation.navigate('Welcome');
+                // } else {
+                //   Alert.alert('Please Check your Credentials');
+                // }
               };
       }
 

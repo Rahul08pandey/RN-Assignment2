@@ -12,7 +12,6 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   return (
-    <NavigationContainer>
     <Drawer.Navigator>
       <Drawer.Screen
         name="Home"
@@ -58,7 +57,6 @@ const DrawerNavigator = () => {
         }}
       />
     </Drawer.Navigator>
-    </NavigationContainer>
   );
 };
 
